@@ -1,0 +1,273 @@
+\documentclass[8pt]{article}
+\usepackage{caption}
+\usepackage{lipsum}
+\usepackage{multicol}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{ragged2e}
+\usepackage[utf8]{inputenc}
+\usepackage{bibentry} % For bibliography entries
+\usepackage{filecontents} % To include bibliography within the document
+\usepackage[backend=biber, style=apa]{biblatex} % Using APA style for references
+
+% Define bibliography entries
+\begin{filecontents*}{\jobname.bib}
+	@book{hyndman2015,
+		title={Forecasting: Principles and Practice},
+		author={Hyndman, Rob J and Athanasopoulos, George},
+		year={2015},
+		publisher={OTexts},
+		url={https://otexts.com/fpp2/arima.html}
+	}
+	
+	@article{clements2021,
+		title={A practical guide to harnessing the HAR volatility model},
+		author={Clements, Adam and Preve, Daniel P.A.},
+		journal={Journal of Banking \& Finance},
+		volume={133},
+		year={2021},
+		publisher={Elsevier},
+		url={https://www.sciencedirect.com/science/article/abs/pii/S0378426621002417}
+	}
+	
+	@book{bollerslev2010,
+		title={Volatility and Time Series Econometrics: Essays in Honor of Robert Engle},
+		editor={Bollerslev, Tim and Russell, Jeffrey and Watson, Mark},
+		year={2010},
+		publisher={Oxford University Press}
+	}
+	
+	@article{degiannakis2005,
+		title={Autoregressive Conditional Heteroskedasticity (ARCH) Models: A Review},
+		author={Degiannakis, Stavros Antonios and Xekalaki, Evdokia},
+		journal={Quality Technology \& Quantitative Management},
+		volume={2},
+		number={2},
+		year={2005}
+	}
+	
+	@article{rodriguez2017,
+		title={Long Memory in Volatility: Evidence from FIGARCH Models},
+		author={Rodriguez, Gabriel},
+		journal={Journal of Financial Econometrics},
+		year={2017}
+	}
+	
+	@article{ruzgar2007,
+		title={Comparison of ARCH Models with Asymmetric Extensions},
+		author={Rüzgar, Bahadtin and Kale, İsmet},
+		journal={Journal of Applied Sciences},
+		year={2007}
+	}
+	
+	@article{szymoniak2020,
+		title={APARCH Models in Financial Volatility Forecasting},
+		author={Szymoniak-Książek, Krzysztof},
+		journal={Econometrics Journal},
+		year={2020}
+	}
+	
+	@article{engle1982,
+		title={Autoregressive Conditional Heteroscedasticity with Estimates of the Variance of United Kingdom Inflation},
+		author={Engle, Robert F},
+		journal={Econometrica},
+		volume={50},
+		number={4},
+		year={1982}
+	}
+	
+	@book{brooks2014,
+		title={Introductory Econometrics for Finance},
+		author={Brooks, Chris},
+		year={2014},
+		publisher={Cambridge University Press}
+	}
+	
+	@article{bollerslev1986,
+		title={Generalized Autoregressive Conditional Heteroskedasticity},
+		author={Bollerslev, Tim},
+		journal={Journal of Econometrics},
+		volume={31},
+		number={3},
+		year={1986}
+	}
+	
+	@article{nelson1991,
+		title={Conditional Heteroskedasticity in Asset Returns: A New Approach},
+		author={Nelson, Daniel B},
+		journal={Econometrica},
+		volume={59},
+		number={2},
+		year={1991}
+	}
+	
+	@article{baillie1996,
+		title={Fractionally Integrated Generalized Autoregressive Conditional Heteroskedasticity},
+		author={Baillie, Richard T},
+		journal={Journal of Econometrics},
+		volume={74},
+		number={1},
+		year={1996}
+	}
+	
+	@article{ding1993,
+		title={A Long Memory Property of Stock Market Returns and a New Model},
+		author={Ding, Zhuanxin},
+		journal={Journal of Empirical Finance},
+		volume={1},
+		number={1},
+		year={1993}
+	}
+	
+	@article{cortes1995,
+		title={Support-Vector Networks},
+		author={Cortes, Corinna and Vapnik, Vladimir},
+		journal={Machine Learning},
+		volume={20},
+		number={3},
+		year={1995}
+	}
+	
+	@article{islam2020,
+		title={LSTM-Based Forecasting of Cryptocurrency Prices},
+		author={Islam, Md. Saiful and Hossain, Emam},
+		journal={Journal of Computational Science},
+		year={2020}
+	}
+	
+	@article{zoumpekas2020,
+		title={Hybrid GARCH-LSTM Approach to Volatility Forecasting},
+		author={Zoumpekas, Thanasis and Houstis, Elias and Vavalis, Manolis},
+		journal={Computational Economics},
+		year={2020}
+	}
+	
+	@article{bara2024,
+		title={Ensemble Methods for Financial Time Series Forecasting},
+		author={Bâra, Adela and Oprea, Simona-Vasilica},
+		journal={Expert Systems with Applications},
+		year={2024}
+	}
+	
+	@article{breeden1978,
+		title={An Intertemporal Asset Pricing Model with Stochastic Consumption and Investment Opportunities},
+		author={Breeden, Douglas T and Litzenberger, Robert H},
+		journal={Journal of Financial Economics},
+		volume={5},
+		number={2},
+		year={1978}
+	}
+	
+	@book{gatheral2006,
+		title={The Volatility Surface: A Practitioner's Guide},
+		author={Gatheral, Jim},
+		year={2006},
+		publisher={Wiley}
+	}
+\end{filecontents*}
+
+\addbibresource{\jobname.bib} % Add the bibliography file
+
+\begin{document}
+	
+	\title{\textbf{Alternative AI Volatility Models}}
+	\author{
+		\small
+		\textbf{Xtreamly} \\
+		\texttt{info@xtreamly.com} \\
+	}
+	\medskip
+	\date{\today}
+	\maketitle
+	
+	\begin{abstract}
+		This paper is a part of Xtreamly AI documentation on volatility model. Where we provide base for alternative models and present their results.
+	\end{abstract}
+	\medskip
+	\begin{multicols}{2}
+		
+		\section{Literature Review}
+		\label{sec:litreview}
+		
+		This section provides an overview of various methodologies utilized in the prediction of price volatility across financial markets, with a specific focus on Ethereum (ETH) and Bitcoin (BTC) price. The methodologies range from traditional statistical approaches to advanced machine learning techniques.
+		
+		
+		\subsection{Autoregressive Integrated Moving Average (ARIMA)}
+		ARIMA models are widely used for time series forecasting. They combine autoregressive (AR) and moving average (MA) components with differencing to achieve stationarity. The effectiveness of ARIMA in predicting Ethereum volatility has been demonstrated through rigorous testing, including the Augmented Dickey-Fuller (ADF) test for stationarity and model selection criteria such as the Bayesian Information Criterion (BIC). Studies have shown that ARIMA models can yield robust forecasting accuracy with low Mean Absolute Percentage Error (MAPE) values, indicating their utility in short-term predictions \cite{hyndman2015}.
+		
+		\subsection{Heterogeneous Autoregressive (HAR) Models}
+		HAR models extend traditional autoregressive frameworks by incorporating different time horizons into the analysis. By utilizing high-frequency data, HAR models can capture short-term fluctuations and long-term trends in volatility. Recent studies have demonstrated that HAR models outperform conventional GARCH models when accounting for structural breaks and external factors such as market indices \cite{clements2021}.
+		
+		\subsection{Autoregressive Conditional Heteroskedasticity (ARCH) Models}
+		Autoregressive Conditional Heteroskedasticity (ARCH) models were a pivotal development in financial econometrics for modeling time-varying volatility in asset returns. This literature review explores the foundational ARCH model and its various extensions, including GARCH, EGARCH, FIGARCH, and APARCH, highlighting their applications and effectiveness in capturing volatility dynamics \cite{bollerslev2010}.
+		
+		Research has shown that different ARCH-type models perform variably depending on the characteristics of the data being analyzed. For instance, studies indicate that FIGARCH and IGARCH models often outperform their symmetric counterparts in capturing long-memory effects in financial returns \cite{degiannakis2005, rodriguez2017}. Moreover, empirical comparisons suggest that EGARCH and TGARCH models provide superior fits for datasets exhibiting leverage effects, while APARCH models excel in scenarios requiring flexible response mechanisms to shocks \cite{ruzgar2007, szymoniak2020}.
+		
+		ARCH models and their extensions—GARCH, EGARCH, FIGARCH, and APARCH—offer robust frameworks for analyzing and forecasting volatility in financial markets. The choice among these models depends on specific data characteristics and the underlying economic phenomena being studied. While ongoing research continues in ARCH models, their parametric assumptions often limit them from capturing the full dynamics of modern financial time series.
+		
+		The original ARCH model, proposed by Engle \cite{engle1982}, describes the variance of a time series as a function of past error terms. This model is particularly adept at capturing the phenomenon of volatility clustering, where high-volatility periods are followed by high volatility and low-volatility periods by low volatility \cite{brooks2014}. The model assumes that the conditional variance of the error term is dependent on the squares of previous error terms, making it suitable for financial data that exhibit non-constant variance over time.
+		
+\subsubsection{Generalized Autoregressive Conditional Heteroskedasticity (GARCH)}
+The Generalized Autoregressive Conditional Heteroskedasticity (GARCH) model, introduced by Bollerslev \cite{bollerslev1986}, builds upon the ARCH framework by incorporating both past squared errors and past conditional variances into the volatility forecasting process. This extension enables GARCH models to capture more persistent and longer-lasting volatility patterns compared to the original ARCH model, which relies solely on past errors. By modeling volatility as a function of both its own lagged values and lagged innovations, GARCH provides a more flexible and efficient approach to handling time-varying volatility in financial time series.
+
+\smallskip
+GARCH models have become a cornerstone in financial econometrics due to their effectiveness in applications such as risk management, option pricing, and portfolio optimization. Their ability to produce more accurate forecasts of future volatility stems from their capacity to account for the clustering of large and small price movements, a common feature in asset returns. Widely adopted in both academic research and industry practice, GARCH models offer a robust tool for understanding and predicting volatility dynamics in markets, including those for traditional assets and cryptocurrencies like Ethereum and Bitcoin.
+		
+		\subsubsection{Exponential GARCH (EGARCH)}
+		EGARCH, developed by Nelson \cite{nelson1991}, addresses some limitations of GARCH models by allowing for asymmetric effects of shocks on volatility. It captures the "leverage effect," where negative shocks tend to increase future volatility more than positive shocks of the same magnitude. This characteristic makes EGARCH particularly useful in financial markets where such asymmetries are prevalent.
+		
+		\subsubsection{Fractionally Integrated GARCH (FIGARCH)}
+		The FIGARCH model, proposed by Baillie \cite{baillie1996}, incorporates long memory processes into the GARCH framework. This model is beneficial for capturing persistent volatility patterns observed in financial time series data. FIGARCH allows for fractional differencing, which can better represent the behavior of financial returns over time compared to standard GARCH models.
+		
+		\subsubsection{Asymmetric Power ARCH (APARCH)}
+		The APARCH model, introduced by Ding \cite{ding1993}, combines features from both GARCH and power transformations to account for asymmetries and varying degrees of responsiveness in volatility to market shocks. The flexibility of APARCH allows it to adapt to different types of financial data, making it a versatile tool for modeling conditional heteroskedasticity.
+		
+		\subsubsection{GJR GARCH (GJRGARCH)}
+		The GJR-GARCH model, developed by Glosten, Jagannathan, and Runkle \cite{glosten1993}, extends the GARCH framework by incorporating an additional term to account for asymmetry in volatility responses to positive and negative shocks. This model explicitly captures the leverage effect, where negative returns (losses) increase future volatility more than positive returns (gains) of the same magnitude. The GJR-GARCH model introduces a dummy variable that activates when past errors are negative, allowing it to differentiate the impact of bad news versus good news on volatility. This makes it particularly effective for modeling financial time series where asymmetric volatility responses are observed, such as in equity markets and cryptocurrency prices \cite{brooks2014}.
+
+		\subsection{Support Vector Regression (SVR)}
+		SVR is a popular machine learning technique that has shown promise in predicting cryptocurrency volatility. It works by finding a hyperplane that best fits the data while allowing for some margin of error. Studies indicate that SVR performs well for daily forecasts, often appearing in the set of best-performing models alongside simpler methods like HAR \cite{cortes1995}.
+		
+		\subsection{Long Short-Term Memory Networks (LSTM)}
+		LSTM networks are a type of recurrent neural network specifically designed to learn from sequences of data, making them suitable for time series forecasting. They have been applied to predict Ethereum price movements by capturing long-term dependencies in historical price data. Research has shown that LSTMs can achieve competitive accuracy compared to traditional statistical methods, especially when combined with other features like sentiment analysis \cite{islam2020}.
+		
+		\subsection{Hybrid Models}
+		Hybrid approaches that combine traditional econometric models with machine learning techniques are gaining traction in the field of volatility forecasting. For instance, integrating GARCH models with LSTM networks allows for capturing both linear and non-linear relationships in price movements, enhancing predictive performance \cite{zoumpekas2020}.
+		
+		\subsection{Ensemble Methods}
+		Ensemble methods involve combining multiple predictive models to improve overall accuracy and robustness. Techniques such as Random Forests and Gradient Boosting Machines have been explored for their ability to aggregate predictions from various base learners, thereby reducing overfitting and improving generalization on unseen data \cite{bara2024}.
+		
+		\subsection{Stochastic Volatility Models (SV Models)}
+		Stochastic Volatility Models (SV Models) represent a significant advancement in the modeling of financial volatility, particularly when compared to traditional GARCH models. These models assume that volatility itself follows a stochastic process, allowing for greater flexibility in capturing the complexities of market behavior. SV models are predominantly used in derivative pricing due to their ability to model the dynamics of underlying asset prices and their volatilities. They provide a more accurate framework for pricing options compared to static models. The flexibility of SV models allows them to accommodate different market conditions and investor sentiments.
+		
+		A common method involves using option-based risk-neutral density derived volatility estimators. This approach utilizes the Breeden-Litzenberger formula, which extracts implied volatilities from observed option prices, particularly focusing on volatility smiles and their interpolation techniques. The Breeden-Litzenberger formula \cite{breeden1978} allows for the extraction of the implied risk-neutral probability density function from market prices of European call options. The second derivative effectively captures the market's expectations of future price movements, providing insights into future volatility expectations based on current market data.
+		
+		Implied volatility also plays a crucial role in this context as it reflects market participants' expectations about future volatility derived from current option prices. Implied volatility is not constant; it can vary significantly across different strike prices and expiration dates, leading to the formation of volatility smiles or skews. These patterns indicate that traders expect greater uncertainty (higher implied volatility) for options that are deep in-the-money or out-of-the-money compared to at-the-money options \cite{gatheral2006}.
+		
+		CEX platforms such as Deribit, Binance, Gemini, and Coinbase provide existing option prices that could be utilized for estimating volatility through SV models. However, the current market for ETH \& BTC options may not support short-term forecasting effectively due to a lack of available options data. For Xtreamly’s goal of predicting short and middle term volatility, this approach is not applicable.
+		
+		\subsection{Key Performance Metrics (KPIs)}
+		The effectiveness of methodologies for prediction and analysis is often evaluated using various performance metrics. Below is an overview of commonly used metrics.
+		\begin{itemize}
+			\item \textbf{MAPE}: Mean Absolute Percentage Error (MAPE) measures the average magnitude of errors in a set of predictions, expressed as a percentage of the actual values. It is a widely used metric for assessing forecast accuracy, especially when values need to be understood as relative errors.
+			\item \textbf{SMAPE}: Symmetric Mean Absolute Percentage Error (SMAPE) is a variation of MAPE that provides a more balanced measure of accuracy by considering both over-predictions and under-predictions symmetrically.
+			\item \textbf{MAE}: Mean Absolute Error (MAE) measures the average of absolute differences between predicted and actual values. It provides a straightforward interpretation of prediction errors without over-penalizing large deviations.
+			\item \textbf{Correlation}: The Pearson correlation coefficient measures the linear correlation between two variables, providing insight into how closely related predicted values are to actual values. A value close to 1 indicates strong positive correlation, while a value close to -1 indicates strong negative correlation.
+			\item \textbf{EV}: Explained Variance (EV) measures the proportion of the total variance in the target variable that is explained by the model. It quantifies how well the model accounts for the variability in the data. Values closer to 1 indicate that the model explains a higher proportion of the variance, whereas values closer to 0 suggest that the model explains little to none of the variability. Negative values may occur when the model performs worse than a simple baseline, such as predicting the mean.
+			\item \textbf{R²}: R-squared (R²) measures the proportion of variance in the dependent variable that can be explained by the independent variables in a regression model. It is often used to evaluate the overall performance of a model in terms of its ability to explain variability.
+			\smallskip
+			\newline
+			Xtreamly currently uses R² as the main evaluation metric for our methodology. This metric provides a comprehensive view of model performance, capturing how well the model explains the variance in the target variable relative to the independent variables. In certain contexts, Xtreamly also examines other metrics which contribute to the performance presented by R².
+		\end{itemize}
+
+\section{Results}
+\textit{(to apply plots and comment on them tmrw)}
+		
+	\end{multicols}
+	
+\newpage
+\section*{References}
+\printbibliography[heading=none]
+	
+\end{document}
