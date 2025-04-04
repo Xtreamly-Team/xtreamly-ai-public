@@ -186,7 +186,7 @@ for s in symbols:
             fig, ax = plt.subplots(figsize=(16, 7))
             ax.set_title(f"{model_name} {s} Weekly Model Fit on Correlation Measure (for {h}min horizon)", pad=30)
             ax.set_ylabel(f"R2 Measure",labelpad=20)
-            ax.bar(df_week['Week End Time'],df_week['Corr.'], color=tailwind['yellow-400'],alpha=.9)
+            ax.bar(df_week['Week End Time'],df_week['Corr.'], color=tailwind['yellow-300'],alpha=.9)
             ax.set_ylim((0, 1))
             ax.yaxis.set_major_formatter(mtick.FuncFormatter(lambda x, pos: '{:,.0f}%'.format(100*x)))            
             ax.set_yticks(ax.get_yticks())
