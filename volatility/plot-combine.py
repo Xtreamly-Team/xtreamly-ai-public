@@ -25,6 +25,27 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error,explained_variance_score
 from sklearn.metrics import explained_variance_score
 
+color_menu = tailwind['stone-800']
+def _tbl(*arg):
+    ax.axis('tight')
+    ax.axis('off')
+    table = ax.table(cellText=df.values, 
+                     colLabels=df.columns, 
+                     cellLoc='center', loc='center')
+    for (row, col), cell in table.get_celld().items():
+        cell.set_edgecolor(tailwind['stone-200'])
+        cell.set_linewidth(1)
+        cell.set_height(.2)
+        if row == 0:
+            cell.set_height(.25)
+            cell.set_text_props(weight='semibold', color='white')
+            cell.set_facecolor(color_menu)
+    table.auto_set_font_size(False)
+    table.set_fontsize(10)
+    fig.tight_layout(rect=[0.004, 0.004, .996, .996])
+    plt.show()
+    return fig
+
 # =============================================================================
 # ARIMA
 # =============================================================================
@@ -61,22 +82,35 @@ df_horizons = pd.DataFrame([
 # =============================================================================
 
 
+fig, ax = plt.subplots(figsize=(12, 4))
+
+df = pd.read_csv(os.path.join('results', 'ARIMA', 'df_results.csv'))
+df = df.sort_values(['Model', 'Symbol', 'Horizon'])
+df = df[df['Model'] == 'ARIMA 10 periods']
+df['Model'] = df['Model'].replace(r'\s*10 periods', '', regex=True)
+df['Correlation'] = df['Correlation'].apply(lambda x: f"{x:.2%}")
+df['EV'] = df['EV'].apply(lambda x: f"{x:.2%}")
+df['R2'] = df['R2'].apply(lambda x: f"{x:.2%}")
+
+fig = _tbl()
+fig.savefig(os.path.join('results', 'ARIMA', f'_KPI_ARIMA.png'), bbox_inches='tight', dpi=300)
+     
 
 
 # =============================================================================
-# # =============================================================================
-# # HAR
-# # =============================================================================
-# symbols = ['ETH', 'BTC']
-# df_horizons = pd.DataFrame([
-#     {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 1, },
-#     {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 5, },
-#     {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 15, },
-#     {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 60, },
-#     {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 240, },
-#     {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 720, },
-#     {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 1440, },
-#     ])
+# HAR
+# =============================================================================
+symbols = ['ETH', 'BTC']
+df_horizons = pd.DataFrame([
+    {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 1, },
+    {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 5, },
+    {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 15, },
+    {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 60, },
+    {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 240, },
+    {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 720, },
+    {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 1440, },
+    ])
+# =============================================================================
 # from PIL import Image
 # size_0 = 700
 # size_1 = 1600
@@ -97,18 +131,27 @@ df_horizons = pd.DataFrame([
 #         image.save(os.path.join('results', 'HAR', f'_{s}.png'))
 # =============================================================================
 
+fig, ax = plt.subplots(figsize=(12, 4))
+df = pd.read_csv(os.path.join('results', 'HAR', 'df_results.csv'))
+df = df.sort_values(['Model', 'Symbol', 'Horizon'])
+df['Correlation'] = df['Correlation'].apply(lambda x: f"{x:.2%}")
+df['EV'] = df['EV'].apply(lambda x: f"{x:.2%}")
+df['R2'] = df['R2'].apply(lambda x: f"{x:.2%}")
+fig = _tbl()
+fig.savefig(os.path.join('results', 'HAR', f'_KPI_HAR.png'), bbox_inches='tight', dpi=300)
+
 # =============================================================================
-# # =============================================================================
-# # ARCH
-# # =============================================================================
-# Models = ['ARCH', 'GARCH', 'EGARCH', 'FIGARCH', 'APARCH', 'GJRGARCH']
-# symbols = ['ETH', 'BTC']
-# df_horizons = pd.DataFrame([
-#     {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 60, },
-#     {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 240, },
-#     {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 720, },
-#     {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 1440, },
-#     ])
+# ARCH
+# =============================================================================
+Models = ['ARCH', 'GARCH', 'EGARCH', 'FIGARCH', 'APARCH', 'GJRGARCH']
+symbols = ['ETH', 'BTC']
+df_horizons = pd.DataFrame([
+    {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 60, },
+    {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 240, },
+    {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 720, },
+    {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 1440, },
+    ])
+# =============================================================================
 # from PIL import Image
 # size_0 = 700
 # size_1 = 1600
@@ -128,8 +171,17 @@ df_horizons = pd.DataFrame([
 #                 image.paste(im,(int(j*size_1), int(i*size_0)))
 #         image.save(os.path.join('results', 'ARCH', f'_{s} {model}.png'))
 # =============================================================================
+df_models = pd.read_csv(os.path.join('results', 'ARCH', 'df_results.csv'))
+df_models = df_models.sort_values(['Symbol', 'Model', 'Horizon'])
 
-
+for model in Models:
+    fig, ax = plt.subplots(figsize=(12, 6))
+    df = df_models[df_models['Model']==model].copy()
+    df['Correlation'] = df['Correlation'].apply(lambda x: f"{x:.2%}")
+    df['EV'] = df['EV'].apply(lambda x: f"{x:.2%}")
+    df['R2'] = df['R2'].apply(lambda x: f"{x:.2%}")
+    fig = _tbl()
+    fig.savefig(os.path.join('results', 'ARCH', f'_KPI_{model}.png'), bbox_inches='tight', dpi=300)
 
 
 

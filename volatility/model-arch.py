@@ -21,10 +21,10 @@ sys.path.insert(0, parent_dir)
 pd.set_option('display.max_columns', None)
 load_dotenv()
 from settings.plot import tailwind, _style, _style_white
-from gcp.func import *
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error,explained_variance_score
 from sklearn.metrics import explained_variance_score
+from arch import arch_model
 
 # =============================================================================
 nr_round = 4
@@ -46,7 +46,6 @@ df_horizons = pd.DataFrame([
     {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 720, },
     {'dt_fr': '2024-10-01', 'dt_to': '2025-04-01', 'h': 1440, },
     ])
-from arch import arch_model
 for s in symbols: 
     for _, r_horizons in df_horizons.iloc[:].iterrows():
         h = r_horizons['h']
