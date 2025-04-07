@@ -9,7 +9,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc} % For special characters
 \usepackage{natbib} % For citations
-
+\usepackage{url}
 
 % Define bibliography file
 \begin{filecontents*}{references.bib}
@@ -251,13 +251,13 @@
 		\section{Literature Review}
 		\label{sec:litreview}
 		
-		This section examines a spectrum of volatility forecasting methods, tailored to the unique dynamics of cryptocurrency markets like Ethereum (ETH) and Bitcoin (BTC). It spans traditional statistical techniques, econometric models, and other machine learning approaches, highlighting their strengths and limitations.
+		This section examines a spectrum of volatility forecasting methods, tailored to cryptocurrency prices of Ethereum (ETH) and Bitcoin (BTC). We have reviewed traditional statistical techniques, econometric models, and other machine learning approaches, highlighting their strengths and limitations.
 		
 		\subsection{Autoregressive Integrated Moving Average}
-		Autoregressive Integrated Moving Average (ARIMA) models combine autoregressive (AR), differencing (I), and moving average (MA) components to model stationary processes. Widely applied to financial data, ARIMA’s efficacy in Ethereum volatility forecasting is supported by stationarity tests like the Augmented Dickey-Fuller (ADF) and model selection via the Bayesian Information Criterion (BIC) \citep{hyndman2018}. While effective for short-term predictions with low Mean Absolute Percentage Error (MAPE), ARIMA struggles with the non-linear, high-frequency volatility spikes common in cryptocurrencies.
+		Autoregressive Integrated Moving Average (ARIMA) models combine autoregressive (AR), differencing (I), and moving average (MA) components to model stationary processes. Widely applied to financial data, including ETH, ARIMA is supported by stationarity tests like the Augmented Dickey-Fuller (ADF) and model selection via the Bayesian Information Criterion (BIC) \citep{hyndman2018}. While effective for short-term predictions with low Mean Absolute Percentage Error (MAPE), ARIMA struggles with the non-linear, high-frequency volatility spikes common in cryptocurrencies.
 		
 		\subsection{Heterogeneous Autoregressive}
-		Heterogeneous Autoregressive (HAR) models leverage multi-resolution time horizons—daily, weekly, and monthly—to capture both short-term fluctuations and longer-term trends in volatility. Recent evidence suggests HAR outperforms traditional GARCH models in cryptocurrency markets by accounting for structural breaks and exogenous factors like market sentiment or regulatory news \citep{clements2021}. Its simplicity and adaptability make it a strong baseline for ETH and BTC volatility prediction.
+		Heterogeneous Autoregressive (HAR) models leverage multi-resolution time horizons to capture both short-term fluctuations and longer-term trends in volatility. Recent evidence suggests HAR outperforms traditional GARCH models in cryptocurrency markets by accounting for structural breaks and exogenous factors like market sentiment or regulatory news \citep{clements2021}. Its simplicity and adaptability make it a strong baseline for ETH and BTC volatility prediction.
 		
 		\subsection{Autoregressive Conditional Heteroskedasticity}
 		Introduced by Engle \citep{engle1982}, Autoregressive Conditional Heteroskedasticity (ARCH) models revolutionized volatility modeling by capturing time-varying variance through past squared residuals. This section reviews ARCH and its extensions—GARCH, EGARCH, FIGARCH, APARCH, and GJR-GARCH—focusing on their applicability to cryptocurrency volatility \citep{bollerslev2010}.
@@ -309,14 +309,36 @@
 			\item \textbf{EV}: Explained Variance measures the fraction of total variance in the target variable (e.g., volatility) accounted for by the model. Values close to 1 reflect a model’s ability to explain data variability, while negative values suggest performance worse than a naive baseline (e.g., mean prediction), a risk in highly erratic ETH markets.
 			
 			\item \textbf{R²}: R-squared evaluates the proportion of variance in the dependent variable explained by the model’s predictors. Widely used in regression analysis, it ranges from 0 to 1, with higher values indicating better fit. In crypto volatility modeling, R² provides a holistic view of how well predictors capture underlying dynamics.
-			
-			\smallskip
-			Xtreamly prioritizes R² as the primary metric for evaluating our volatility forecasting methodology. This choice reflects its comprehensive assessment of model fit, capturing the explained variance in ETH and BTC volatility relative to input features. To complement R², Xtreamly selectively employs additional metrics like MAPE and MAE, enhancing the robustness of performance evaluation in specific forecasting scenarios.
 		\end{itemize}
-		
+		Xtreamly prioritizes R² as the primary metric for evaluating our volatility forecasting methodology. This choice reflects its comprehensive assessment of model fit, capturing the explained variance in ETH and BTC volatility relative to input features. To complement R², Xtreamly selectively employs additional metrics like MAPE and MAE, enhancing the robustness of performance evaluation in specific forecasting scenarios.
+					
 		\section{Testing Results}
 		
-		This section presents the empirical evaluation of volatility forecasting models applied to Ethereum (ETH) and Bitcoin (BTC) price data. The analysis leverages historical price volatility from October 1, 2024, to April 1, 2025, sourced from standardized datasets. Models are tested across multiple time horizons to assess their predictive accuracy and robustness, with results quantified using key performance metrics.
+		This section presents the empirical evaluation of volatility forecasting models applied ETH and BTC price data. We have used historical price volatility from January 1, 2022, to April 1, 2025, sourced from prices. Models are tested across multiple time horizons to assess their predictive accuracy and robustness, with results quantified using key performance metrics.
+		
+		\paragraph{Volatility Definition}
+		Volatility measures the degree of variation in the returns of a financial asset over a period. At Xtreamly, it is expressed as the standard deviation of the asset's logarithmic returns. Higher volatility indicates greater risk due to the larger range of potential outcomes.
+		
+		\smallskip
+		We apply volatility using a moving window of logarithmic returns to capture recent variability. For a window size $w$, the rolling volatility $\sigma$ at time $t$ is, the realized volatility is given by:
+		\[
+		\sigma_{\text{rolling}_t} = \sqrt{\frac{1}{w-1} \sum_{i=t-w+1}^{t} (r_i - \bar{r})^2}
+		\]
+		Where:
+		\begin{itemize}
+			\item $\sigma_{\text{rolling}_t}$ represents rolling volatility at time $t$,
+			\item $w$ represents a window size of rolling timeline (e.g., 1 minute or 60 minutes),
+			\item $r_i$ represents log-return at time $t$ in respect to price at time $r_i = \ln\left(\frac{\text{price}_i}{\text{price}_{i-w}}\right)$,
+			\item $\bar{r}$ represents a mean of returns over window time $(t, t-w)$.
+		\end{itemize}
+		The realized volatility is an input for forecasts.
+		
+		
+	\section{Implementation}
+	
+	The volatility forecasting models evaluated in this study are implemented within the Xtreamly ecosystem, with all source code and associated resources made publicly available in the Xtreamly AI Public GitHub repository: \url{https://github.com/Xtreamly-Team/xtreamly-ai-public}. 
+	
+	The implementation is written in Python, leveraging widely-used, open-source libraries to ensure accessibility and reproducibility. A detailed list of dependencies is provided in the repository's documentation. The repository also includes the historical ETH and BTC price datasets used in this analysis. The code is modular, well-documented, and adheres to best practices.
 		
 		\subsection{ARIMA Models}
 		
@@ -469,7 +491,8 @@
 		\end{itemize}
 		
 		\textbf{Summary:} While all ARCH-type models capture short-term volatility dynamics to varying degrees, none exhibit meaningful explanatory power at daily horizons (\( R^2 \approx 0 \)). FIGARCH and GJR-GARCH demonstrate slightly better long-horizon robustness. The inability of these models to explain long-range Ethereum volatility highlights the need for more flexible, non-linear architectures—such as hybrid models or deep learning approaches—explored in the following sections.
-		
+
+				
 	\end{multicols}
 
 \newpage
